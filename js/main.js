@@ -1,3 +1,9 @@
+
+// Zodat de continuously changing weights video start op het juiste tijd
+document.getElementById('AI_training').addEventListener('loadedmetadata', function() {
+  this.currentTime = 5;
+}, false);
+
 var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
 // Moest mijn eigen toevoegen, want bij javascript doet hij raar als ik negatieve nummers
@@ -12,12 +18,12 @@ function mod(n, m) {
 var alphaappend ="<tr>";
 for (var i = 0; i < alphabet.length; i++) {
   alphaappend += "<td>"+alphabet[i]+"</td>";
-  
+
 }
 alphaappend += "</tr><tr>";
 for (var i = 0; i < alphabet.length; i++) {
   alphaappend += "<td>"+i+"</td>";
-  
+
 }
 $("#alphabettable").append(alphaappend);
 
@@ -47,7 +53,7 @@ function updateAlphabet() {
 
 $(function(){
   $("#Range3").on("propertychange change click keyup input paste", function(event) {
-      updateAlphabet(); 
+      updateAlphabet();
     });
 });
 
@@ -102,7 +108,7 @@ $(function() {
     // Look for changes in the value
     $("#Range1").on("propertychange change click keyup input paste", function(event) {
       updateCaesar(elem);
-      
+
     });
     elem.on("propertychange change click keyup input paste", function(event) {
       updateCaesar(elem);
@@ -183,33 +189,33 @@ function updateVignère() {
   for (var i = 0; i < Vignèrezin.length; i++) {
     (Vignèrewoord[i % Vignèrewoord.length] !== undefined) ? codewoordlang += Vignèrewoord[i % Vignèrewoord.length]: codewoordlang += "";
   }
-  
+
   $('#Vignère #Codezinoutput').html(Vignèrezin);
   $('#Vignère #Codewoordoutput').html(codewoordlang);
   $('#Vignère #Vignèreoutput').html(Vignèreoutput(Vignèrezin, codewoordlang));
-  
+
   $('#Vignère #Codezinoutputcijfers').html("");
   $('#Vignère #Codewoordoutputcijfers').html("");
   $('#Vignère #Vignèreoutputcijfers').html("");
-  
-  
+
+
   // Voegt elke cijfer toe aan de tabel die de som vormt.
   for (i = 0; i < Vignèrezin.length; i++) {
     $('#Vignère #Codezinoutputcijfers').append("<td>" + Vignèrezin.toAlphabetIndex()[i] + "</td>");
     if (codewoordlang.toAlphabetIndex()[i] !== undefined){
-      $('#Vignère #Codewoordoutputcijfers').append("<td>" + codewoordlang.toAlphabetIndex()[i] + "</td>");    
+      $('#Vignère #Codewoordoutputcijfers').append("<td>" + codewoordlang.toAlphabetIndex()[i] + "</td>");
     } else {
-      $('#Vignère #Codewoordoutputcijfers').append("<td></td>");   
+      $('#Vignère #Codewoordoutputcijfers').append("<td></td>");
     }
     $('#Vignère #Vignèreoutputcijfers').append("<td>" + Vignèreoutput(Vignèrezin, codewoordlang).toAlphabetIndex()[i] + "</td>");
   }
-  
+
   if ($('#Vignère #Codezinoutput').html() === "" || $('#Vignère #Codewoordoutput').html() === "") {
     $('#Vignèresom').css('opacity', '0');
   } else {
     $('#Vignèresom').css('opacity', '1');
   }
-  
+
 }
 
 function Vignèreoutput(zin, woord) {
