@@ -4,6 +4,18 @@ document.getElementById('AI_training').addEventListener('loadedmetadata', functi
   this.currentTime = 5;
 }, false);
 
+var bool = false;
+setInterval(function(){
+  // Zodat het de eerste keer niet gebeurt
+  if ($('#AI_training')[0].currentTime > 8) {
+    bool = true;
+  }
+  // Minder ver dan 7 sec
+  if (bool & $('#AI_training')[0].currentTime < 7) {
+    $('#AI_training')[0].currentTime = 7;
+  }
+}, 10);
+
 var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
 // Moest mijn eigen toevoegen, want bij javascript doet hij raar als ik negatieve nummers
